@@ -1,0 +1,9 @@
+body {
+    height: 100vh;
+}
+
+
+.user-icon {
+    width: 56px;
+    aspect-ratio: 1/1;
+}
