@@ -13,14 +13,23 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId("category_id")
+                ->references("id")
+                ->on("categories")
+            ->onDelete("CASCADE");
+
             $table->foreignId("user_id")
                 ->references("id")
                 ->on("users")
             ->onDelete("CASCADE");
+
+
             $table->string("title", 200);
             $table->text("description");
             $table->smallInteger("urgency");
             $table->dateTime("due_date");
+            $table->boolean("is_done")->default(false);
             $table->timestamps();
         });
     }
@@ -31,6 +40,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table("tasks", function(Blueprint $table) {
+            $table->dropForeign("category_id");
             $table->dropForeign("user_id");
         });
         

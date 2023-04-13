@@ -1,24 +1,28 @@
 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-opacity-95">
-    <td class="w-4 p-4">
+    <td class="w-4 p-3">
         <div class="flex items-center justify-center">
             <input id="checkbox-table-search-1" data-task-id="{{$task["id"]}}" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         </div>
     </td>
-    <td class="w-4 p-4">
-        <div class="flex items-center justify-center">
-            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+    <td class="px-5 py-3 text-base">
+        <div class="flex justify-center items-center">
+            <span class="inline-flex w-3 h-3 bg-red-600 rounded-full" style="background-color: "></span>
+            <div class="inline-flex mx-auto">Categoria</div>
         </div>
     </td>
-    <th scope="row" class="flex items-center justify-center text-base px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+    <th scope="row" class="flex items-center justify-center text-base px-5 py-3 text-gray-900 whitespace-nowrap dark:text-white">
         {{$task["title"]}}
     </th>
     <!--<td class="px-6 py-4 text-center break-normal text-base">
         {`{$task["description"]}}
     </td>-->
-    <td class="px-6 py-4 text-center text-base">
+    <td class="px-5 py-3 max-w-max text-center text-base">
         {{$task["created_at"]}}
     </td>
-    <td class="px-6 py-4">
+    <td class="px-5 py-3 text-center text-base">
+        {{$task["due_date"]}}
+    </td>
+    <td class="px-5 py-3">
         <div class="flex justify-around items-center">
             <!-- Modal toggle -->
             <a href="#" type="button" data-modal-target="editTaskModal" data-modal-show="editTaskModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">

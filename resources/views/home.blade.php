@@ -10,24 +10,25 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="w-full text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="">
-                        <th scope="col" class="px-6 py-3 text-center text-base">
+                        <th scope="col" class="px-5 py-2 text-center text-base">
                             Status
                         </th>
-                        <th class="w-4 p-4">
-                            <div class="flex items-center justify-center text-base">
-                                Cor
-                            </div>
+                        <th scope="col" class="px-5 py-2 text-center text-base">
+                            Categoria
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-base">
+                        <th scope="col" class="px-5 py-2 text-center text-base">
                             Título
                         </th>
                         <!--<th scope="col" class="px-6 py-3 text-center text-base">
                             Descrição
                         </th>-->
-                        <th scope="col" class="px-6 py-3 text-center text-base">
+                        <th scope="col" class="px-5 py-2 text-center text-base">
                             Criado em
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-base">
+                        <th scope="col" class="px-5 py-2 text-center text-base">
+                            Valido até
+                        </th>
+                        <th scope="col" class="px-5 py-2 text-center text-base">
                             Ações
                         </th>
                     </tr>

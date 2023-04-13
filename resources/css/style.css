@@ -7,3 +7,13 @@ body {
     width: 56px;
     aspect-ratio: 1/1;
 }
+
+
+.container-principal {
+    height: calc(100vh - 80px);
+}
+
+.form-auth {
+    width: 30rem;
+    margin: auto;
+}
