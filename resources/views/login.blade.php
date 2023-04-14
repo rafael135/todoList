@@ -25,7 +25,6 @@
 
         <a href="{{route("user.register")}}" class="flex justify-center items-center text-base mx-6 text-white hover:underline hover:text-slate-300">Não possui uma conta? Clique aqui!</a>
 
-        
     </form>
   
     
