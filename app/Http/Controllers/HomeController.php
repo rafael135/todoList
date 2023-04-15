@@ -10,6 +10,7 @@ class HomeController extends Controller
         $loggedUser = AuthController::checkAuth();
         //dd($loggedUser);
 
+        /*
         $tasks = [
             [
                 "id" => 1,
@@ -23,13 +24,14 @@ class HomeController extends Controller
                 "urgency" => 1,
             ]
         ];
-
-        return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks]);
+        */
 
         if($loggedUser == false) {
             return redirect()->route("user.login");
         }
 
-        return view("home", ["loggedUser" => $loggedUser]);
+        $tasks = $loggedUser->tasks;
+
+        return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks]);
     }
 }
