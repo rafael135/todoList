@@ -20,6 +20,9 @@ Route::get("/", [HomeController::class, "index"])->name("home");
 
 Route::middleware(["auth"])->group(function () {
     Route::get("/logout", [AuthController::class, "logout"])->name("user.logout");
+    Route::post("/task", [TaskController::class, "getById"])->name("task.get");
+    Route::post("/task/edit", [TaskController::class, "edit"])->name("task.edit");
+
     
 });
 
@@ -30,5 +33,5 @@ Route::get("/register", [AuthController::class, "registerView"])->name("user.reg
 Route::post("/register", [AuthController::class, "registerAction"])->name("user.registerAction");
 
 
-Route::post("/task", [TaskController::class, "getById"])->name("task.get");
+
 

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+//use Carbon\CarbonTimeZone;
+//use DateTime;
+//use DateTimeZone;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,6 +35,33 @@ class HomeController extends Controller
 
         $tasks = $loggedUser->tasks;
 
-        return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks]);
+        $error = $r->session()->get("error", false);
+        $success = $r->session()->get("success", false);
+        
+        if($error != false) {
+            $r->session()->forget("error");
+        }
+        if($success != false) {
+            $r->session()->forget("success");
+        }
+        
+
+        /*
+        foreach($tasks as $task) {
+            $due_date = $task["due_date"];
+            $created_at = $task["created_at"];
+
+            $d = DateTime::createFromFormat("Y-m-d H:i:s", $due_date);
+            $due_date = $d->format("d/m/Y H:i:s");
+
+            $c = DateTime::createFromFormat("Y-m-d H:i:s", $created_at);
+            $created_at = $c->format("d/m/Y H:i:s");
+
+            $task["due_date"] = $due_date;
+            $task["created_at"] = $created_at;
+        }
+        */
+
+        return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success]);
     }
 }

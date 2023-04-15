@@ -1,3 +1,4 @@
+let taskIdEditInput = document.getElementById("task_id");
 let titleEditInput = document.getElementById("title");
 let descriptionEditInput = document.getElementById("description");
 let dueDateEditInput = document.getElementById("due_date");
@@ -23,7 +24,8 @@ async function getTaskData(element) {
 
     response.then((res) => {
         if(res.success == true) {
-            console.log(res);
+            //console.log(res);
+            taskIdEditInput.value = res.task.id;
             titleEditInput.value = res.task.title;
             descriptionEditInput.value = res.task.description;
             dueDateEditInput.value = res.task.due_date;
