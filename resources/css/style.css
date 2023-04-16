@@ -17,3 +17,15 @@ body {
     width: 30rem;
     margin: auto;
 }
+
+
+
+#createTaskButton svg {
+    fill: #F1F5F9;
+}
+#createTaskButton:hover svg {
+    fill: #31C48D;
+}
+#createTaskButton:active svg {
+    fill: #0E9F6E;
+}

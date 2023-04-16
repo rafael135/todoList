@@ -20,8 +20,12 @@ Route::get("/", [HomeController::class, "index"])->name("home");
 
 Route::middleware(["auth"])->group(function () {
     Route::get("/logout", [AuthController::class, "logout"])->name("user.logout");
-    Route::post("/task", [TaskController::class, "getById"])->name("task.get");
+
+    Route::post("/task/create", [TaskController::class, "create"])->name("task.create");
     Route::post("/task/edit", [TaskController::class, "edit"])->name("task.edit");
+    Route::delete("/task/delete", [TaskController::class, "delete"])->name("task.delete");
+    Route::post("/task", [TaskController::class, "getById"])->name("task.get");
+    
 
     
 });

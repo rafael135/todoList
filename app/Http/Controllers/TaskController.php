@@ -11,7 +11,48 @@ use Illuminate\Support\Facades\DB;
 class TaskController extends Controller
 {
     public function create(Request $r) {
-        
+        $loggedUser = AuthController::checkAuth();
+
+        if($loggedUser == false) {
+            return redirect()->route("user.login");
+        }
+
+        $user_id = $loggedUser->id;
+        $category_id = $r->input("category", false);
+        $title = $r->input("title", false);
+        $description = $r->input("description", false);
+        $due_date = $r->input("due_date", false);
+        $urgency = 1;
+
+
+        if($category_id && $title && $due_date) {
+            $d = DateTime::createFromFormat("d/m/Y", $due_date);
+            $due_date = $d->format("Y-m-d");
+
+
+            $result = Task::create([
+                "user_id" => $user_id,
+                "category_id" => $category_id,
+                "title" => $title,
+                "description" => $description,
+                "due_date" => $due_date,
+                "urgency" => $urgency
+            ]);
+
+            if($result != false) {
+                return redirect()->route("home")->with("success", [
+                    "msg" => "Tarefa criada com sucesso!"
+                ]);
+            } else {
+                return redirect()->route("home")->with("error", [
+                    "msg" => "Não foi possível criar a Tarefa!"
+                ]);
+            }
+        }
+
+        return redirect()->route("home")->with("error", [
+            "msg" => "Não foi possível criar a Tarefa!"
+        ]);
     }
 
     public function getById(Request $r) {
@@ -104,6 +145,28 @@ class TaskController extends Controller
     }
 
     public function delete(Request $r) {
+        $loggedUser = AuthController::checkAuth();
 
+        if($loggedUser == false) {
+            return ["success" => false];
+        }
+
+        $id = $r->input("id", false);
+
+        if($id) {
+            $task = Task::find($id);
+
+            $isValid = ($task->user_id == $loggedUser->id);
+
+            if($isValid) {
+                $task->delete();
+
+                return ["success" => true];
+            } else {
+                return ["success" => false];
+            }
+        } else {
+            return ["success" => false];
+        }
     }
 } 
