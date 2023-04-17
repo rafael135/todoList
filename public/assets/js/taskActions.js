@@ -33,16 +33,18 @@ async function getTaskData(element) {
     });
 }
 
+let idToDelete = 0;
 
+function setDeleteId(element) {
+    idToDelete = element.getAttribute("data-task-id");
+}
 
-async function deleteTask(element) {
-    let id = element.getAttribute("data-task-id");
-
+async function deleteTask() {
     let req = await fetch(deleteTaskRoute, {
         method: "DELETE",
         body: JSON.stringify({
             _token: csrfToken,
-            id: id
+            id: idToDelete
         }),
 
         headers: {
@@ -55,7 +57,7 @@ async function deleteTask(element) {
 
     response.then((res) => {
         if(res.success == true) {
-            
+            document.querySelector(`tr[data-task-id="${idToDelete}"]`).remove();
         }
     });
 }
@@ -90,7 +92,7 @@ async function updateStatus(element) {
 
     response.then((res) => {
         if(res.success == true) {
-            document.location.reload();
+            //document.location.reload();
         } else {
             if(originalStatus == true) {
                 element.checked = true;
