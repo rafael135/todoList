@@ -23,6 +23,7 @@ Route::middleware(["auth"])->group(function () {
 
     Route::post("/task/create", [TaskController::class, "create"])->name("task.create");
     Route::post("/task/edit", [TaskController::class, "edit"])->name("task.edit");
+    Route::post("/task/update", [TaskController::class, "updateStatus"])->name("task.update");
     Route::delete("/task/delete", [TaskController::class, "delete"])->name("task.delete");
     Route::post("/task", [TaskController::class, "getById"])->name("task.get");
     

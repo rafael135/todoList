@@ -17,7 +17,8 @@ class Task extends Model
         "title",
         "description",
         "due_date",
-        "urgency"
+        "urgency",
+        "is_done"
     ];
 
 

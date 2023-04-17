@@ -59,3 +59,44 @@ async function deleteTask(element) {
         }
     });
 }
+
+
+
+async function updateStatus(element) {
+    let id = element.getAttribute("data-task-id");
+    let originalStatus = element.hasAttribute("checked");
+
+    console.log(originalStatus);
+
+    let status = (originalStatus == true) ? false : true;
+
+    console.log(status);
+
+    let req = await fetch(taskUpdateRoute, {
+        method: "POST",
+        body: JSON.stringify({
+            _token: csrfToken,
+            id: id,
+            status: status
+        }),
+
+        headers: {
+            "Content-type": "application/json",
+            "Accept": "application/json"
+        }
+    });
+
+    let response = req.json();
+
+    response.then((res) => {
+        if(res.success == true) {
+            document.location.reload();
+        } else {
+            if(originalStatus == true) {
+                element.checked = true;
+            } else {
+                element.checked = false;
+            }
+        }
+    });
+}

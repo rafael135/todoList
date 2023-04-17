@@ -25,7 +25,7 @@ class TaskController extends Controller
         $urgency = 1;
 
 
-        if($category_id && $title && $due_date) {
+        if($category_id && $title && $description && $due_date) {
             $d = DateTime::createFromFormat("d/m/Y", $due_date);
             $due_date = $d->format("Y-m-d");
 
@@ -36,7 +36,8 @@ class TaskController extends Controller
                 "title" => $title,
                 "description" => $description,
                 "due_date" => $due_date,
-                "urgency" => $urgency
+                "urgency" => $urgency,
+                "is_done" => false
             ]);
 
             if($result != false) {
@@ -160,6 +161,39 @@ class TaskController extends Controller
 
             if($isValid) {
                 $task->delete();
+
+                return ["success" => true];
+            } else {
+                return ["success" => false];
+            }
+        } else {
+            return ["success" => false];
+        }
+    }
+
+
+
+    public function updateStatus(Request $r) {
+        $loggedUser = AuthController::checkAuth();
+
+        if($loggedUser == false) {
+            return ["success" => false];
+        }
+
+        $id = $r->input("id", false);
+        $status = $r->input("status", null);
+
+        if($id) {
+            $task = Task::find($id);
+
+            if($task != null) {
+                $isValid = ($task->user_id == $loggedUser->id);
+
+                if($isValid == false) {
+                    return ["success" => false];
+                }
+                $task->is_done = $status;
+                $task->save();
 
                 return ["success" => true];
             } else {

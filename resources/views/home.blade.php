@@ -183,6 +183,7 @@
 
         <script type="text/javascript">
             let taskDataRoute = `{{route("task.get")}}`;
+            let taskUpdateRoute = `{{route("task.update")}}`;
             let deleteTaskRoute = `{{route("task.delete")}}`;
             let csrfToken = `{{csrf_token()}}`;
         </script>

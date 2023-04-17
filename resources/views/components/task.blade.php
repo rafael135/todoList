@@ -1,7 +1,7 @@
 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-opacity-95">
     <td class="w-4 p-3">
         <div class="flex items-center justify-center">
-            <input id="checkbox-table-search-1" data-task-id="{{$task["id"]}}" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <input id="checkbox-table-search-1" data-task-id="{{$task["id"]}}" type="checkbox" onclick="updateStatus(this)" {{$task["is_done"] == 1 ? "checked" : ""}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         </div>
     </td>
     <td class="px-5 py-3 text-base">
