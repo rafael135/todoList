@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,9 @@ Route::middleware(["auth"])->group(function () {
     Route::post("/task/update", [TaskController::class, "updateStatus"])->name("task.update");
     Route::delete("/task/delete", [TaskController::class, "delete"])->name("task.delete");
     Route::post("/task", [TaskController::class, "getById"])->name("task.get");
+
+    Route::get("/tasks", [UserController::class, "showTasks"])->name("user.tasks");
+    Route::get("/categories", [UserController::class, "showCategories"])->name("user.categories");
     
 
     
