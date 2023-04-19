@@ -10,12 +10,15 @@
             <div class="flex items-center justify-between rounded-t-lg py-3 px-3 bg-white dark:bg-slate-800">
                 <div class="">
                     <!-- Modal Create Toggle -->
-                    <a href="#" type="button" id="createTaskButton" data-modal-target="createTaskModal" data-modal-show="createTaskModal" class="flex items-center py-2 px-1 rounded-md font-medium text-blue-600 dark:text-slate-100 dark:hover:text-green-400 dark:bg-gray-600 dark:border-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:active:text-green-500">
+                    <a href="#" type="button" data-tooltip-target="create-tooltip" data-tooltip-placement="right" data-tooltip-trigger="hover" id="createTaskButton" data-modal-target="createTaskModal" data-modal-show="createTaskModal" class="flex items-center py-2 px-1 rounded-md font-medium text-blue-600 dark:text-slate-100 dark:hover:text-green-400 dark:bg-gray-600 dark:border-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:active:text-green-500">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                         </svg>
-                        <div class="text-inherit">Criar Tarefa</div>
                     </a>
+                    <div id="create-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Criar Tarefa
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
                 </div>
 
                 <div class="flex-grow">
