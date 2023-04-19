@@ -41,17 +41,17 @@ class TaskController extends Controller
             ]);
 
             if($result != false) {
-                return redirect()->route("home")->with("success", [
+                return redirect()->route("user.tasks")->with("success", [
                     "msg" => "Tarefa criada com sucesso!"
                 ]);
             } else {
-                return redirect()->route("home")->with("error", [
+                return redirect()->route("user.tasks")->with("error", [
                     "msg" => "Não foi possível criar a Tarefa!"
                 ]);
             }
         }
 
-        return redirect()->route("home")->with("error", [
+        return redirect()->route("user.tasks")->with("error", [
             "msg" => "Não foi possível criar a Tarefa!"
         ]);
     }
@@ -129,17 +129,17 @@ class TaskController extends Controller
                 
                 $task->save();
 
-                return redirect()->route("home")->with("success", [
+                return redirect()->route("user.tasks")->with("success", [
                     "msg" => "A tarefa foi alterada com sucesso!"
                 ]);
 
             } else {
-                return redirect()->route("home")->with("error", [
+                return redirect()->route("user.tasks")->with("error", [
                     "msg" => "Você não possui permissão para alterar essa tarefa!"
                 ]);
             }
         } else {
-            return redirect()->route("home")->with("error", [
+            return redirect()->route("user.tasks")->with("error", [
                 "msg" => "Não foi possível alterar a tarefa!"
             ]);
         }

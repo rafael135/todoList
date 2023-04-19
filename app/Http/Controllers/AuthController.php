@@ -133,7 +133,11 @@ class AuthController extends Controller
             "email" => $email,
             "password" => $password
         ], true)) {
-            return redirect()->route("home");
+            $name = User::find(Auth::id())->name;
+
+            return redirect()->route("home")->with("success", [
+                "msg" => "Bem vindo $name!"
+            ]);
         } else {
             return redirect()->route("user.register");
         }
