@@ -29,6 +29,7 @@ Route::middleware(["auth"])->group(function () {
     Route::delete("/task/delete", [TaskController::class, "delete"])->name("task.delete");
     Route::post("/task", [TaskController::class, "getById"])->name("task.get");
 
+    Route::post("/category", [CategoryController::class, "getById"])->name("category.get");
     Route::post("/category/create", [CategoryController::class, "create"])->name("category.create");
     Route::post("/category/edit", [CategoryController::class, "edit"])->name("category.edit");
     Route::delete("/category/delete", [CategoryController::class, "delete"])->name("category.delete");

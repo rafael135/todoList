@@ -29,3 +29,7 @@ body {
 #createTaskButton:active svg {
     fill: #0E9F6E;
 }
+
+.datepicker-picker {
+    background-color: rgb(31 41 55) !important;
+}

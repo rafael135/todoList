@@ -68,11 +68,11 @@ async function updateStatus(element) {
     let id = element.getAttribute("data-task-id");
     let originalStatus = element.hasAttribute("checked");
 
-    console.log(originalStatus);
+    //console.log(originalStatus);
 
     let status = (originalStatus == true) ? false : true;
 
-    console.log(status);
+    //console.log(status);
 
     let req = await fetch(taskUpdateRoute, {
         method: "POST",
