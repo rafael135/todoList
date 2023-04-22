@@ -1,7 +1,7 @@
 @include("partials.header")
 
-@include("partials.navbar", ["loggedUser" => $loggedUser])
-
+<!--@'include("partials.navbar", ["loggedUser" => $loggedUser])-->
+@include("partials.sideMenu", ["loggedUser" => $loggedUser])
 @component("partials.body")
 
 
@@ -41,7 +41,7 @@
                 </div>
 
                 <div id="categories-head" class="flex bg-gray-700 text-gray-300 text-lg">
-                    <div class="task-color w-24 py-2 text-center font-bold text-lg border-r border-slate-600">
+                    <div class="task-color sm:w-16 lg:w-24 py-2 text-center font-bold text-lg border-r border-slate-600">
                         Status
                     </div>
 
@@ -57,7 +57,7 @@
                         Válido até
                     </div>
 
-                    <div class="task-actions py-2 w-48 text-center font-bold text-lg">
+                    <div class="task-actions py-2 sm:w-32 lg:w-48 text-center font-bold text-lg">
                         Ações
                     </div>
                 </div>

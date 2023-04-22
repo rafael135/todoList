@@ -11,4 +11,4 @@
     <title>{{$pageTitle ?? ""}}</title>
 </head>
 
-<body class="bg-gradient-to-br from-slate-300 to-gray-400">
+<body class="bg-gradient-to-br from-slate-300 to-gray-400 flex min-h-screen">

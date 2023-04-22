@@ -1,6 +1,7 @@
 @include("partials.header")
 
-@include("partials.navbar", ["loggedUser" => $loggedUser])
+<!--@`include("partials.navbar", ["loggedUser" => $loggedUser])-->
+@include("partials.sideMenu", ["loggedUser" => $loggedUser])
 
 @component("partials.body")
 
@@ -46,10 +47,10 @@
                     </div>
 
                     <div class="category-instances py-2 flex-1 text-center font-bold text-lg border-r border-slate-600">
-                        Quantidade de Tarefas
+                        Qte Tarefas
                     </div>
 
-                    <div class="category-actions py-2 w-48 text-center font-bold text-lg">
+                    <div class="category-actions py-2 sm:w-32 lg:w-48 text-center font-bold text-lg">
                         Ações
                     </div>
                 </div>

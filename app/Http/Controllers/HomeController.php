@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 //use DateTime;
 //use DateTimeZone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -63,5 +64,42 @@ class HomeController extends Controller
         */
 
         return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success]);
+    }
+
+
+    public function dashboard(Request $r) {
+        $loggedUser = AuthController::checkAuth();
+
+        if($loggedUser == false) {
+            return redirect()->route("user.login");
+        }
+
+        $error = $r->session()->get("error", false);
+        $success = $r->session()->get("success", false);
+        
+        if($error != false) {
+            $r->session()->forget("error");
+        }
+        if($success != false) {
+            $r->session()->forget("success");
+        }
+
+        $data = [];
+
+
+        $qteTasks = count($loggedUser->tasks);
+        $qteDoneTasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->where("is_done", "=", true)->get()->count();
+        $qtePendingTasks = $qteTasks - $qteDoneTasks;
+
+        $pctDoneTasks = ($qteDoneTasks / $qteTasks) * 100.0;
+        $pctDoneTasks = round($pctDoneTasks, 2, PHP_ROUND_HALF_UP);
+
+        
+        $data["qteTasks"] = $qteTasks;
+        $data["qteDoneTasks"] = $qteDoneTasks;
+        $data["pctDoneTasks"] = $pctDoneTasks;
+        $data["qtePendingTasks"] = $qtePendingTasks;
+
+        return view("dashboard", ["loggedUser" => $loggedUser, "error" => $error, "success" => $success, "data" => $data]);
     }
 }

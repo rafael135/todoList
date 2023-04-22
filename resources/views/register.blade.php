@@ -1,6 +1,8 @@
 @include("partials.header")
 
-@include("partials.navbar", ["loggedUser" => $loggedUser])
+<!-- @`include("partials.navbar", ["loggedUser" => $loggedUser]) -->
+@include("partials.sideMenu", ["loggedUser" => $loggedUser])
+
 
 @component("partials.body")
     <form class="form-auth rounded-xl shadow-lg bg-slate-800 pb-4 pt-0 bg-opacity-95" method="POST" action="{{route("user.registerAction")}}">

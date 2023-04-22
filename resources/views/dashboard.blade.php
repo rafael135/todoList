@@ -4,11 +4,32 @@
 @include("partials.sideMenu", ["loggedUser" => $loggedUser])
 
 @component("partials.body")
-
+    
 
     
         <div class="relative w-full mt-3 shadow-md sm:rounded-lg">
-            
+            <div class="tasks=progress rounded-none">
+                <div class="tasks-progress-head bg-slate-800 text-white text-3xl font-bold flex justify-center items-center py-3">
+                    Progresso das Tarefas
+                </div>
+
+                <div class="task-progress-body bg-gray-700 p-3">
+                    <div class="w-full bg-gray-200 h-8 rounded-full dark:bg-gray-600 border border-gray-500 mb-3">
+                        <div class="h-8 flex justify-center items-center text-base font-medium text-blue-100 text-center p-0.5 leading-none rounded-full bg-green-500" style="width: {{$data["pctDoneTasks"]}}%"> {{number_format($data["pctDoneTasks"], 2, ',', '.')}}%</div>
+                    </div>
+
+
+                    <div class="text-center text-xl text-white font-bold">
+                        Total: {{$data["qteTasks"]}}
+                    </div>
+                    <div class="text-center text-xl text-white font-bold">
+                        Pendentes: {{$data["qtePendingTasks"]}}
+                    </div>
+                    <div class="text-center text-xl text-white font-bold">
+                        Concluídas: {{$data["qteDoneTasks"]}}
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script type="text/javascript">

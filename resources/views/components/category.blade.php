@@ -13,7 +13,7 @@
         {{count($category->tasks)}}
     </div>
 
-    <div class="category-actions py-2 w-48 text-center font-bold text-lg flex justify-center items-center">
+    <div class="category-actions py-2 sm:w-32 lg:w-48 text-center font-bold text-lg flex justify-center items-center">
         <div class="w-full flex justify-evenly items-center">
             <!-- Modal Edit Toggle -->
             <a href="#" type="button" data-modal-target="editCategoryModal" data-modal-show="editCategoryModal" data-category-id="{{$category["id"]}}" onclick="getCategoryData(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">

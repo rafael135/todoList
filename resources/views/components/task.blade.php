@@ -1,6 +1,6 @@
 <div data-task-id="{{$task["id"]}}" class="task-instance border-b border-slate-700 flex flex-row hover:bg-gray-900">
     <div class=""></div>
-    <div class="task-status w-24 py-3 border-r border-slate-600">
+    <div class="task-status sm:w-16 lg:w-24 py-3 border-r border-slate-600">
         <div class="flex items-center justify-center">
             <input id="checkbox-table-search-1" data-task-id="{{$task["id"]}}" type="checkbox" onclick="updateStatus(this)" {{$task["is_done"] == 1 ? "checked" : ""}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         </div>
@@ -30,7 +30,7 @@
         {{$task->due_date}}
     </div>
 
-    <div class="task-actions py-2 w-48 text-center font-bold text-lg flex justify-center items-center">
+    <div class="task-actions py-2 sm:w-32 lg:w-48 text-center font-bold text-lg flex justify-center items-center">
         <div class="w-full flex justify-evenly items-center">
             <!-- Modal Edit Toggle -->
             <a href="#" type="button" data-modal-target="editTaskModal" data-modal-show="editTaskModal" data-task-id="{{$task["id"]}}" onclick="getTaskData(this)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">

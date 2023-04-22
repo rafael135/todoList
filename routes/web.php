@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/", [HomeController::class, "dashboard"])->name("home");
 
 Route::middleware(["auth"])->group(function () {
+    Route::get("/dashboard", [HomeController::class, "dashboard"])->name("user.dashboard");
+
+
     Route::get("/logout", [AuthController::class, "logout"])->name("user.logout");
 
     Route::post("/task/create", [TaskController::class, "create"])->name("task.create");
