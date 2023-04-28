@@ -1,7 +1,7 @@
 @include("partials.header")
 
 <!--@`include("partials.navbar", ["loggedUser" => $loggedUser])-->
-@include("partials.sideMenu", ["loggedUser" => $loggedUser])
+@include("partials.sideMenu", ["loggedUser" => $loggedUser, "currentPage" => $currentPage])
 
 @component("partials.body")
 
@@ -60,6 +60,10 @@
                         @foreach ($categories as $category)
                             <x-category :category=$category/>
                         @endforeach
+                    @else
+
+                        <div class="text-center py-4 text-xl font-bold">Nenhuma categoria encontrada!</div>
+
                     @endif
                 </div>
             </div>
@@ -101,7 +105,7 @@
                                 
                                 <div class="pickr h-full w-full flex justify-center gap-3 items-center">
                                     <label for="editColor" class="inline-flex -mt-1 text-base font-medium text-gray-900 dark:text-white">Cor:</label>
-                                    <input type="color" id="editColor" class="w-10 h-10 border-transparent bg-transparent">
+                                    <input type="color" name="color" id="editColor" class="w-10 h-10 border-transparent bg-transparent">
                                 </div>
                             </div>
 

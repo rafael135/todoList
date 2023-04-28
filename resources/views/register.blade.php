@@ -1,7 +1,7 @@
 @include("partials.header")
 
 <!-- @`include("partials.navbar", ["loggedUser" => $loggedUser]) -->
-@include("partials.sideMenu", ["loggedUser" => $loggedUser])
+@include("partials.sideMenu", ["loggedUser" => $loggedUser, "currentPage" => $currentPage])
 
 
 @component("partials.body")

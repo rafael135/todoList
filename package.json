@@ -14,6 +14,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@simonwep/pickr": "^1.8.2"
+        "@simonwep/pickr": "^1.8.2",
+        "chart.js": "^4.2.1",
+        "chartjs-plugin-annotation": "^2.2.1",
+        "chartjs-plugin-datalabels": "^2.2.0",
+        "moment": "^2.29.4"
     }
 }

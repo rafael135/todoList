@@ -21,6 +21,7 @@ class CategoryController extends Controller
 
             if($category != null) {
                 $data = [];
+                $data["id"] = $category->id;
                 $data["title"] = $category->title;
                 $data["color"] = $category->color;
 
@@ -73,7 +74,47 @@ class CategoryController extends Controller
     }
 
     public function edit(Request $r) {
+        $loggedUser = AuthController::checkAuth();
 
+        if($loggedUser == false) {
+            return redirect()->route("user.login");
+        }
+
+        $id = $r->input("id", false);
+        $title = $r->input("title", false);
+        $color = $r->input("color", false);
+
+        if($id && $title && $color) {
+            $category = Category::find($id);
+
+            if($category != null) {
+                $isValid = ($category->user_id == $loggedUser->id);
+
+                if($isValid == true) {
+                    $category->title = $title;
+                    $category->color = $color;
+                    
+                    $category->save();
+
+                    return redirect()->route("user.categories")->with("success", [
+                        "msg" => "Categoria alterada com sucesso!"
+                    ]);
+                } else {
+                    return redirect()->route("user.categories")->with("error", [
+                        "msg" => "Você não possui permissão para alterar essa categoria!"
+                    ]);
+                }
+            } else {
+                return redirect()->route("user.categories")->with("error", [
+                    "msg" => "Não foi possível editar a categoria!"
+                ]);
+            }
+
+        } else {
+            return redirect()->route("user.categories")->with("error", [
+                "msg" => "Não foi possível editar a categoria!"
+            ]);
+        }
     }
 
     public function delete(Request $r) {

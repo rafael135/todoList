@@ -1,21 +1,22 @@
 @include("partials.header")
 
 <!-- @`include("partials.navbar", ["loggedUser" => $loggedUser]) -->
-@include("partials.sideMenu", ["loggedUser" => $loggedUser])
+@include("partials.sideMenu", ["loggedUser" => $loggedUser, "currentPage" => $currentPage])
 
 @component("partials.body")
-    
-
-    
-        <div class="relative w-full mt-3 shadow-md sm:rounded-lg">
-            <div class="tasks=progress rounded-none">
-                <div class="tasks-progress-head bg-slate-800 text-white text-3xl font-bold flex justify-center items-center py-3">
+        <div class="relative w-full mt-3 shadow-lg sm:rounded-lg">
+            
+            <div class="tasks-progress rounded-none md:rounded-t-lg">
+                <div class="tasks-progress-head bg-slate-800 text-white text-3xl font-bold flex md:rounded-t-lg justify-center items-center py-3">
                     Progresso das Tarefas
                 </div>
 
                 <div class="task-progress-body bg-gray-700 p-3">
                     <div class="w-full bg-gray-200 h-8 rounded-full dark:bg-gray-600 border border-gray-500 mb-3">
                         <div class="h-8 flex justify-center items-center text-base font-medium text-blue-100 text-center p-0.5 leading-none rounded-full bg-green-500" style="width: {{$data["pctDoneTasks"]}}%"> {{number_format($data["pctDoneTasks"], 2, ',', '.')}}%</div>
+                    </div>
+                    <div class="flex justify-center items-center mb-3">
+                        <canvas id="tasksChart" class="max-w-screen-sm max-h-96"></canvas>
                     </div>
 
 
@@ -32,9 +33,18 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <script type="text/javascript">
             let csrfToken = `{{csrf_token()}}`;
+
+            let qteCompletedTasks = {{$data["qteDoneTasks"]}};
+            let qtePendingTasks = {{$data["qtePendingTasks"]}}
         </script>
+
+        <script src="{{asset("assets/js/dashboardCharts.js")}}"></script>
+        
+        
 
         @if($error != false)
             <div id="toast-danger" class="absolute bottom-0 right-4 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">

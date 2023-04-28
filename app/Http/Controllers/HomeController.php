@@ -91,7 +91,14 @@ class HomeController extends Controller
         $qteDoneTasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->where("is_done", "=", true)->get()->count();
         $qtePendingTasks = $qteTasks - $qteDoneTasks;
 
-        $pctDoneTasks = ($qteDoneTasks / $qteTasks) * 100.0;
+        $pctDoneTasks = 0;
+
+        if($qteTasks != 0) {
+            $pctDoneTasks = ($qteDoneTasks / $qteTasks) * 100.0;
+        } else {
+            $pctDoneTasks = 100.0;
+        }
+        
         $pctDoneTasks = round($pctDoneTasks, 2, PHP_ROUND_HALF_UP);
 
         
@@ -100,6 +107,8 @@ class HomeController extends Controller
         $data["pctDoneTasks"] = $pctDoneTasks;
         $data["qtePendingTasks"] = $qtePendingTasks;
 
-        return view("dashboard", ["loggedUser" => $loggedUser, "error" => $error, "success" => $success, "data" => $data]);
+        $currentPage = "dashboard";
+
+        return view("dashboard", ["loggedUser" => $loggedUser, "error" => $error, "success" => $success, "data" => $data, "currentPage" => $currentPage]);
     }
 }

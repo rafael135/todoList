@@ -1,5 +1,6 @@
 let editInputTitle = document.getElementById("editTitle");
 let editInputColor = document.getElementById("editColor");
+let editInputId = document.getElementById("editCategory_id");
 
 let createInputTitle = document.getElementById("createTitle");
 let createInputColor = document.getElementById("createColor");
@@ -71,6 +72,7 @@ async function getCategoryData(element) {
         if(res.success == true) {
             editInputTitle.value = res.category.title;
             editInputColor.value = res.category.color;
+            editInputId.value = res.category.id;
         }
     });
 }
@@ -106,3 +108,6 @@ async function deleteCategory() {
         }
     });
 }
+
+
+

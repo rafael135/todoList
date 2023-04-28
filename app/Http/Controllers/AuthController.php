@@ -30,7 +30,9 @@ class AuthController extends Controller
 
     public function loginView(Request $r) {
         if(self::checkAuth() == false) {
-            return view("login", ["loggedUser" => false]);
+            $currentPage = "login";
+
+            return view("login", ["loggedUser" => false, "currentPage" => $currentPage]);
         } else {
             return redirect()->route("home");
         }
@@ -41,8 +43,9 @@ class AuthController extends Controller
             // Erros caso o usuario tenha tentado se logar e os dados estejam errados
             $errors = $r->input("errors", false);
 
+            $currentPage = "register";
 
-            return view("register", ["loggedUser" => false, "errors" => $errors]);
+            return view("register", ["loggedUser" => false, "errors" => $errors, "currentPage" => $currentPage]);
         } else {
             return redirect()->route("home");
         }

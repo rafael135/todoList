@@ -1,7 +1,7 @@
 <div data-task-id="{{$task["id"]}}" class="task-instance border-b border-slate-700 flex flex-row hover:bg-gray-900">
     <div class=""></div>
-    <div class="task-status sm:w-16 lg:w-24 py-3 border-r border-slate-600">
-        <div class="flex items-center justify-center">
+    <div class="task-status sm:w-16 lg:w-24 border-r border-slate-600">
+        <div class="h-full flex items-center justify-center">
             <input id="checkbox-table-search-1" data-task-id="{{$task["id"]}}" type="checkbox" onclick="updateStatus(this)" {{$task["is_done"] == 1 ? "checked" : ""}} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         </div>
     </div>
@@ -12,21 +12,26 @@
 
             $category = Category::find($task["category_id"]);
         @endphp
-        <div class="relative h-full flex justify-start items-center">
+        <div class="relative h-full flex justify-start items-center" data-tooltip-target="category{{$category->id}}-tooltip" data-tooltip-placement="bottom" data-tooltip-trigger="hover">
             <div class=" w-1/6 flex justify-center items-center">
-                <span class="inline-flex w-3 h-3 bg-red-600 rounded-full" style="background-color: {{$category->color}}"></span>
+                <span class="inline-flex w-3.5 h-3.5 bg-red-600 rounded-full" style="background-color: {{$category->color}}"></span>
             </div>
-            <div class="absolute w-full h-full my-auto flex text-center justify-center items-center truncate text-ellipsis hover:text-clip">{{$task->title}}</div>
+            
+            <div class="absolute w-full h-full my-auto flex text-center justify-center items-center truncate hover:text-clip hover:cursor-default">{{$task->title}}</div>
         </div>
+    </div>
+    <div id="category{{$category->id}}-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        {{$task["category"]->title}}
+        <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
 
 
 
-    <div class="task-created_at py-3 flex-1 text-center text-base border-r border-slate-600">
+    <div class="task-created_at py-3 flex-1 text-center text-base border-r border-slate-600 hover:cursor-default">
         {{$task->created_at}}
     </div>
 
-    <div class="task-due_date py-3 flex-1 text-center text-base border-r border-slate-600">
+    <div class="task-due_date py-3 flex-1 text-center text-base border-r border-slate-600 hover:cursor-default">
         {{$task->due_date}}
     </div>
 

@@ -25,7 +25,9 @@ class UserController extends Controller
             $r->session()->forget("success");
         }
 
-        return view("categories", ["loggedUser" => $loggedUser, "categories" => $categories, "error" => $error, "success" => $success]);
+        $currentPage = "categories";
+
+        return view("categories", ["loggedUser" => $loggedUser, "categories" => $categories, "error" => $error, "success" => $success, "currentPage" => $currentPage]);
     }
 
     public function showTasks(Request $r) {
@@ -47,6 +49,8 @@ class UserController extends Controller
             $r->session()->forget("success");
         }
 
-        return view("tasks", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success]);
+        $currentPage = "tasks";
+
+        return view("tasks", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success, "currentPage" => $currentPage]);
     }
 }

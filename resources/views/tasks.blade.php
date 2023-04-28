@@ -1,7 +1,7 @@
 @include("partials.header")
 
 <!--@'include("partials.navbar", ["loggedUser" => $loggedUser])-->
-@include("partials.sideMenu", ["loggedUser" => $loggedUser])
+@include("partials.sideMenu", ["loggedUser" => $loggedUser, "currentPage" => $currentPage])
 @component("partials.body")
 
 
@@ -11,7 +11,7 @@
 
             
 
-            <div id="categories-table" class="bg-slate-800 w-full md:rounded-t-lg">
+            <div id="categories-table" class="bg-slate-800 bg-gradient-to-b from-slate-800 from-60% to-slate-900 w-full md:rounded-t-lg">
                 <div class="flex p-3">
                     <div class="">
                         <!-- Modal Create Toggle -->
@@ -67,6 +67,11 @@
                         @foreach ($tasks as $task)
                             <x-task :task=$task/>
                         @endforeach
+
+                    @else
+
+                        <div class="text-center py-4 text-xl font-bold">Nenhuma tarefa encontrada!</div>
+
                     @endif
                 </div>
             </div>

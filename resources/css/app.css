@@ -3,6 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+@layer components {
+    .sideMenu-item {
+        @apply flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700;
+    }
+
+    .sideMenu-item.active {
+        @apply bg-slate-700 outline outline-1 outline-slate-800 opacity-90
+    }
+    .sideMenu-item.active svg {
+        @apply fill-white
+    }
+}
+
 @layer utilities {
     .container-principal-sm {
         padding-left: 17rem;

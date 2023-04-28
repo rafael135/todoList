@@ -57,7 +57,7 @@ async function deleteTask() {
 
     response.then((res) => {
         if(res.success == true) {
-            document.querySelector(`tr[data-task-id="${idToDelete}"]`).remove();
+            document.querySelector(`.task-instance[data-task-id="${idToDelete}"]`).remove();
         }
     });
 }
