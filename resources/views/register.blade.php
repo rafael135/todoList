@@ -8,7 +8,7 @@
     <form class="form-auth rounded-xl shadow-lg bg-slate-800 pb-4 pt-0 bg-opacity-95" method="POST" action="{{route("user.registerAction")}}">
         @csrf
 
-        <h1 class="text-4xl text-center text-slate-100 bg-slate-700 py-4 rounded-t-xl mb-4 border-b-slate-400 shadow-sm">
+        <h1 class="text-4xl uppercase text-center text-slate-100 bg-gradient-to-r from-slate-800 from-55% to-slate-900 py-4 rounded-t-xl mb-4 border-b border-b-slate-950 shadow-sm">
             Registre-se
         </h1>
 
