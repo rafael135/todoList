@@ -66,6 +66,38 @@
 
                     @endif
                 </div>
+
+                <div class="categories-pagination bg-slate-900 flex flex-col justify-center items-center pt-0 pb-4">
+                    <hr class="h-px my-3 w-[95%] shadow-md bg-gray-200 border-0 dark:bg-gray-700">
+
+                    @php
+                        $routePrev = ($pagination["currentPage"] > 0) ? route("user.categories", ["page" => $pagination["currentPage"] - 1]) : "";
+
+                        $routeNext = ($pagination["currentPage"] < $pagination["maxPage"]) ? route("user.categories", ["page" => $pagination["currentPage"] + 1]) : "";
+
+
+                    @endphp
+
+
+                    <div class="flex flex-col items-center">
+                        <!-- Help text -->
+                        <span class="text-sm text-gray-700 dark:text-gray-400">
+                            Mostrando <span class="font-semibold text-gray-900 dark:text-white">{{$pagination["offsetItem"]}}</span> - <span class="font-semibold text-gray-900 dark:text-white">{{$pagination["showingItems"]}}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{$pagination["categoriesCount"]}}</span> Categorias
+                        </span>
+                        <div class="inline-flex mt-2 xs:mt-0">
+                            <!-- Buttons -->
+                            <a href="{{$routePrev}}" class="pagination-previousBtn">
+                                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                                Anterior
+                            </a>
+                            <a href="{{$routeNext}}" class="pagination-nextBtn">
+                                Próximo
+                                <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+  
+                </div>
             </div>
 
             
