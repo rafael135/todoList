@@ -104,6 +104,12 @@ class TaskController extends Controller
         $due_date = $r->input("due_date", false);
         $category_id = $r->input("category", false);
 
+        if($category_id == null) {
+            return redirect()->route("user.tasks")->with("error", [
+                "msg" => "Categoria inválida!"
+            ]);
+        }
+
         if($id && $title && $description && $due_date && $category_id) {
             $task = Task::find($id);
 

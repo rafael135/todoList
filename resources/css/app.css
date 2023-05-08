@@ -31,6 +31,12 @@
     .pagination-previousBtn.active-page, .pagination-nextBtn.active-page {
 
     }
+
+
+
+    .loading-text {
+        @apply animate-pulse text-gray-600 bg-gray-600 rounded;
+    }
 }
 
 @layer utilities {

@@ -3,10 +3,23 @@ let titleEditInput = document.getElementById("editTitle");
 let descriptionEditInput = document.getElementById("editDescription");
 let dueDateEditInput = document.getElementById("editDue_date");
 
+/*
+    // TO DO
+const showTaskModal = document.getElementById("showTask-modal");
 
-async function getTaskData(element) {
-    let id = element.getAttribute("data-task-id");
-    
+const opts = {
+    onHide: () => {
+
+    }
+}
+
+*/
+
+
+
+let taskDetails = false;
+
+async function getTaskData(id) {
     let req = await fetch(taskDataRoute, {
         method: "POST",
         body: JSON.stringify({
@@ -22,16 +35,38 @@ async function getTaskData(element) {
 
     let response = req.json();
 
-    response.then((res) => {
-        if(res.success == true) {
-            //console.log(res);
-            taskIdEditInput.value = res.task.id;
-            titleEditInput.value = res.task.title;
-            descriptionEditInput.value = res.task.description;
-            dueDateEditInput.value = res.task.due_date;
+    await response.then((res) => {
+        if(res.success) {
+            taskDetails = {
+                id: res.task.id,
+                title: res.task.title,
+                description: res.task.description,
+                due_date: res.task.due_date,
+                status: res.task.is_done
+            };
+        } else {
+            taskDetails = false;
         }
+    })
+    .catch((ex) => {
+        taskDetails = false;
     });
 }
+
+
+async function showTaskEditData(task) {
+    let id = task.getAttribute("data-task-id");
+
+    await getTaskData(id);
+
+    if(taskDetails != false) {
+        taskIdEditInput.value = taskDetails.id;
+        titleEditInput.value = taskDetails.title;
+        descriptionEditInput.value = taskDetails.description;
+        dueDateEditInput.value = taskDetails.due_date;
+    }
+}
+
 
 let idToDelete = 0;
 
@@ -101,4 +136,31 @@ async function updateStatus(element) {
             }
         }
     });
+}
+
+
+
+async function getTaskView(task) {
+    let id = task.getAttribute("data-task-id");
+
+    await getTaskData(id);
+
+    if(taskDetails != false) {
+        let taskTitle = document.getElementById("showTask-title");
+        let taskDescription = document.getElementById("showTaskDescription");
+        let taskDueDate = document.getElementById("showTaskDueDate");
+
+
+        taskTitle.innerHTML = taskDetails.title;
+        //taskTitle.classList.add("text-slate-100");
+        //taskTitle.classList.remove("loading-text");
+
+        taskDescription.innerHTML = taskDetails.description;
+        //taskDescription.classList.add("text-slate-100");
+        //taskDescription.classList.remove("loading-text");
+
+        taskDueDate.innerHTML = taskDetails.due_date;
+        //taskDueDate.classList.add("text-slate-100");
+        //taskDueDate.classList.remove("loading-text");
+    }
 }

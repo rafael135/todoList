@@ -115,7 +115,7 @@ class UserController extends Controller
             $pagination["currentPage"] = intval($page);
             $pagination["qteItems"] = $itemsToShow;
             $pagination["offsetItem"] = $offsetPage + 1;
-            $pagination["showingItems"] = $offsetPage + ($tasksCount - $offsetPage);
+            $pagination["showingItems"] = $offsetPage + ($itemsToShow);
 
             $pagination["itemsCount"] = $tasksCount;
             
