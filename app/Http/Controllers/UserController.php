@@ -42,12 +42,15 @@ class UserController extends Controller
 
         $offsetPage = 0;
         $pagination["offsetItem"] = 1;
-        if($categoriesCount > 10) {
+
+        /*
+        if($categoriesCount >= 10) {
             $pagination["showingItems"] = 10;
         } else {
             $pagination["showingItems"] = $categoriesCount;
         }
-        
+        */
+        $pagination["showingItems"] = 10;
 
         if($page != false && is_numeric($page)) {
             $offsetPage = intval($page) * 10;
@@ -55,15 +58,28 @@ class UserController extends Controller
             $pagination["currentPage"] = intval($page);
             $pagination["qteItems"] = $itemsToShow;
             $pagination["offsetItem"] = $offsetPage + 1;
-            $pagination["showingItems"] = $offsetPage + ($categoriesCount - $offsetPage);
+            $pagination["showingItems"] = $offsetPage + ($itemsToShow);
 
             $pagination["itemsCount"] = $categoriesCount;
             
         }
 
-        $categories = DB::table("categories")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
+        $categories = [];
 
-        return view("categories", ["loggedUser" => $loggedUser, "categories" => $categories, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination]);
+        $search = $r->query("search", false);
+
+        if($search) {
+            $pagination["categoriesCount"] = DB::table("categories")->select()->where("user_id", "=", $loggedUser->id, "and")->where("title", "like", "%$search%")->offset($offsetPage)->limit(10)->get()->count();
+            $pagination["maxPage"] = floor(intval($pagination["categoriesCount"]) / $itemsToShow);
+
+            $categories = DB::table("categories")->select()->where("user_id", "=", $loggedUser->id, "and")->where("title", "like", "%$search%")->offset($offsetPage)->limit(10)->get();
+        } else {
+            $categories = DB::table("categories")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
+        }
+
+        
+
+        return view("categories", ["loggedUser" => $loggedUser, "categories" => $categories, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination, "search" => $search]);
     }
 
     public function showTasks(Request $r) {
@@ -101,29 +117,40 @@ class UserController extends Controller
 
         $offsetPage = 0;
         $pagination["offsetItem"] = 1;
-        if($tasksCount > 10) {
+        /*
+        if($tasksCount >= 10) {
             $pagination["showingItems"] = 10;
         } else {
             $pagination["showingItems"] = $tasksCount;
         }
+        */
+        $pagination["showingItems"] = 10;
 
         if($page != false && is_numeric($page)) {
             $offsetPage = intval($page) * 10;
-
-            
 
             $pagination["currentPage"] = intval($page);
             $pagination["qteItems"] = $itemsToShow;
             $pagination["offsetItem"] = $offsetPage + 1;
             $pagination["showingItems"] = $offsetPage + ($itemsToShow);
 
-            $pagination["itemsCount"] = $tasksCount;
-            
+            $pagination["itemsCount"] = $tasksCount;   
         }
 
-        $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
+        $search = $r->query("search", false);
+
+        if($search) {
+            $pagination["tasksCount"] = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id, "and")->where("title", "like", "%$search%")->offset($offsetPage)->limit(10)->get()->count();
+            $pagination["maxPage"] = floor(intval($pagination["tasksCount"]) / $itemsToShow);
+
+            $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id, "and")->where("title", "like", "%$search%")->offset($offsetPage)->limit(10)->get();
+        } else {
+            $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
+        }
+
+        
 
 
-        return view("tasks", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination]);
+        return view("tasks", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination, "search" => $search]);
     }
 }
