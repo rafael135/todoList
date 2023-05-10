@@ -73,16 +73,6 @@
 
                 <div class="categories-pagination bg-slate-900 flex flex-col justify-center items-center pt-0 pb-4">
                     <hr class="h-px my-3 w-[95%] shadow-md bg-gray-200 border-0 dark:bg-gray-700">
-
-                    @php
-                        $routePrev = ($pagination["currentPage"] > 0) ? route("user.categories", ["page" => $pagination["currentPage"] - 1, "search" => ($search != false) ? $search : ""]) : "";
-
-                        $routeNext = ($pagination["currentPage"] < $pagination["maxPage"]) ? route("user.categories", ["page" => $pagination["currentPage"] + 1 , "search" => ($search != false) ? $search : ""]) : "";
-
-
-                    @endphp
-
-
                     <div class="flex flex-col items-center">
                         <!-- Help text -->
                         <span class="text-sm text-gray-700 dark:text-gray-400">

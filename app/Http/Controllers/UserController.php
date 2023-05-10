@@ -77,9 +77,28 @@ class UserController extends Controller
             $categories = DB::table("categories")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
         }
 
+
+        // Variaveis que armazenam as rotas dos botões "anterior" e "próximo" da paginação
+        $routePrev = ($pagination["currentPage"] > 0) 
+            ? route("user.categories", ["page" => $pagination["currentPage"] - 1, "search" => ($search != false) ? $search : ""])
+        : "";
+
+        $routeNext = ($pagination["currentPage"] < $pagination["maxPage"]) 
+            ? route("user.categories", ["page" => $pagination["currentPage"] + 1 , "search" => ($search != false) ? $search : ""])
+        : "";
         
 
-        return view("categories", ["loggedUser" => $loggedUser, "categories" => $categories, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination, "search" => $search]);
+        return view("categories", [
+            "loggedUser" => $loggedUser,
+            "categories" => $categories,
+            "error" => $error,
+            "success" => $success,
+            "currentPage" => $currentPage,
+            "pagination" => $pagination,
+            "search" => $search,
+            "routePrev" => $routePrev,
+            "routeNext" => $routeNext
+        ]);
     }
 
     public function showTasks(Request $r) {
@@ -148,9 +167,27 @@ class UserController extends Controller
             $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
         }
 
-        
+
+        // Variaveis que armazenam as rotas dos botões "anterior" e "próximo"
+        $routePrev = ($pagination["currentPage"] > 0)
+            ? route("user.tasks", ["page" => $pagination["currentPage"] - 1, "search" => ($search != false) ? $search : ""])
+        : "";
+
+        $routeNext = ($pagination["currentPage"] < $pagination["maxPage"])
+            ? route("user.tasks", ["page" => $pagination["currentPage"] + 1, "search" => ($search != false) ? $search : ""]) 
+        : "";
 
 
-        return view("tasks", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success, "currentPage" => $currentPage, "pagination" => $pagination, "search" => $search]);
+        return view("tasks",[
+            "loggedUser" => $loggedUser,
+            "tasks" => $tasks,
+            "error" => $error,
+            "success" => $success,
+            "currentPage" => $currentPage,
+            "pagination" => $pagination,
+            "search" => $search,
+            "routePrev" => $routePrev,
+            "routeNext" => $routeNext
+        ]);
     }
 }

@@ -63,7 +63,12 @@ class HomeController extends Controller
         }
         */
 
-        return view("home", ["loggedUser" => $loggedUser, "tasks" => $tasks, "error" => $error, "success" => $success]);
+        return view("home", [
+            "loggedUser" => $loggedUser,
+            "tasks" => $tasks,
+            "error" => $error,
+            "success" => $success
+        ]);
     }
 
 
@@ -109,6 +114,12 @@ class HomeController extends Controller
 
         $currentPage = "dashboard";
 
-        return view("dashboard", ["loggedUser" => $loggedUser, "error" => $error, "success" => $success, "data" => $data, "currentPage" => $currentPage]);
+        return view("dashboard", [
+            "loggedUser" => $loggedUser,
+            "error" => $error,
+            "success" => $success,
+            "data" => $data,
+            "currentPage" => $currentPage
+        ]);
     }
 }

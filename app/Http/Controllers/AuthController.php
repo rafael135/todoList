@@ -45,7 +45,11 @@ class AuthController extends Controller
 
             $currentPage = "register";
 
-            return view("register", ["loggedUser" => false, "errors" => $errors, "currentPage" => $currentPage]);
+            return view("register", [
+                "loggedUser" => false,
+                "errors" => $errors,
+                "currentPage" => $currentPage
+            ]);
         } else {
             return redirect()->route("home");
         }
@@ -120,7 +124,9 @@ class AuthController extends Controller
                 "msg" => "As senhas são diferentes!"
             ];
 
-            return redirect()->route("user.register", ["errors" => $errors]);
+            return redirect()->route("user.register", [
+                "errors" => $errors
+            ]);
         }
 
 
