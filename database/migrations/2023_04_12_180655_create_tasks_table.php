@@ -28,9 +28,9 @@ return new class extends Migration
             $table->string("title", 200);
             $table->text("description");
             $table->smallInteger("urgency");
-            $table->dateTime("due_date");
             $table->boolean("is_done")->default(false);
             $table->timestamps();
+            $table->dateTime("due_date");
         });
     }
 

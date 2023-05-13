@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -165,6 +166,17 @@ class UserController extends Controller
             $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id, "and")->where("title", "like", "%$search%")->offset($offsetPage)->limit(10)->get();
         } else {
             $tasks = DB::table("tasks")->select()->where("user_id", "=", $loggedUser->id)->offset($offsetPage)->limit(10)->get();
+        }
+
+        foreach($tasks as $task) {
+            $createdDate = $task->created_at;
+            $dueDate = $task->due_date;
+
+            $createdDate = new Carbon($createdDate);
+            $dueDate = new Carbon($dueDate);
+
+            $task->created_at = $createdDate->format("d/m/Y");
+            $task->due_date = $dueDate->format("d/m/Y");
         }
 
 

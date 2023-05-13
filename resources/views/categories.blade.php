@@ -9,10 +9,10 @@
     
         <div class="relative w-full mt-3 shadow-md sm:rounded-lg">
             <div id="categories-table" class="bg-slate-800 w-full md:rounded-t-lg">
-                <div class="flex p-3">
-                    <div class="">
+                <div class="flex flex-col md:flex-row p-3">
+                    <div class="flex flex-row mb-2 md:mb-0">
                         <!-- Modal Create Toggle -->
-                        <a href="#" type="button" data-tooltip-target="create-tooltip" data-tooltip-placement="right" data-tooltip-trigger="hover" id="createCategoryButton" data-modal-target="createCategoryModal" data-modal-show="createCategoryModal" class="flex items-center py-2 px-1 rounded-md font-medium text-blue-600 dark:text-slate-100 dark:hover:text-green-400 dark:bg-gray-600 dark:border-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:active:text-green-500">
+                        <a href="#" type="button" data-tooltip-target="create-tooltip" data-tooltip-placement="right" data-tooltip-trigger="hover" id="createCategoryButton" data-modal-target="createCategoryModal" data-modal-show="createCategoryModal" class="flex items-center py-2 px-1 rounded-md font-medium text-blue-600 dark:text-slate-100 dark:hover:text-green-400 dark:bg-gray-600 dark:border-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:active:text-green-500 max-w-fit">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
@@ -22,27 +22,28 @@
                             Criar Categoria
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                    </div>
+                    
 
-                    <div class="flex-grow flex justify-center items-center">
-                        <h2 class="text-white bg-transparent text-center text-xl font-bold uppercase">Categorias</h2>
+                        <div class="flex-grow flex justify-center items-center md:ms-2">
+                            <h2 class="text-white bg-transparent text-center text-xl font-bold uppercase">Categorias</h2>
+                        </div>
                     </div>
     
                     <label for="table-search" class="sr-only">Search</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                        </div>
-                        <form method="GET" action="{{route('user.categories')}}">
+                    <div class="md:ms-auto">
+                        <form method="GET" action="{{route('user.categories')}}" class="flex items-center relative">
+                            <div class="flex items-center pl-3 pointer-events-none absolute">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                            </div>
                             <input type="hidden" name="page" value="{{$pagination['currentPage']}}" />
-                            <input type="text" name="search" value="{{($search != false) ? $search : ''}}" id="table-search-users" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Procurar por Categorias">
+                            <input type="text" name="search" value="{{($search != false) ? $search : ''}}" id="table-search-users" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-full md:max-w-fit" placeholder="Procurar por Categorias">
                         </form>
                         
                     </div>
                 </div>
 
                 <div id="categories-head" class="flex bg-gray-700 text-gray-300 text-lg">
-                    <div class="category-color w-24 py-2 text-center font-bold text-lg border-r border-slate-600">
+                    <div class="category-color w-20 py-2 text-center font-bold text-lg border-r border-slate-600">
                         Cor
                     </div>
 
@@ -54,7 +55,7 @@
                         Qte Tarefas
                     </div>
 
-                    <div class="category-actions py-2 sm:w-32 lg:w-48 text-center font-bold text-lg">
+                    <div class="category-actions py-2 w-36 text-center font-bold text-lg">
                         Ações
                     </div>
                 </div>

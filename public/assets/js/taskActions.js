@@ -41,6 +41,7 @@ async function getTaskData(id) {
                 id: res.task.id,
                 title: res.task.title,
                 description: res.task.description,
+                created_at: res.task.created_at,
                 due_date: res.task.due_date,
                 status: res.task.is_done
             };
@@ -148,6 +149,7 @@ async function getTaskView(task) {
     if(taskDetails != false) {
         let taskTitle = document.getElementById("showTask-title");
         let taskDescription = document.getElementById("showTaskDescription");
+        let taskCreatedAt = document.getElementById("showTaskCreatedAt");
         let taskDueDate = document.getElementById("showTaskDueDate");
 
 
@@ -158,6 +160,12 @@ async function getTaskView(task) {
         taskDescription.innerHTML = taskDetails.description;
         //taskDescription.classList.add("text-slate-100");
         //taskDescription.classList.remove("loading-text");
+
+        let created_at = new String(taskDetails.created_at);
+        created_at = created_at.substring(0, 10);
+        created_at = created_at.split('-');
+        created_at = `${created_at[2]}/${created_at[1]}/${created_at[0]}`;
+        taskCreatedAt.innerHTML = created_at;
 
         taskDueDate.innerHTML = taskDetails.due_date;
         //taskDueDate.classList.add("text-slate-100");

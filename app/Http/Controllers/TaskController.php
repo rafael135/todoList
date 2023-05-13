@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -68,17 +69,31 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         if($task != null) {
-            $due_date = $task["due_date"];
-            //$created_at = $task["created_at"];
+            $due_date = $task->due_date;
+            $created_at = $task->created_at->toDateTimeString(); // Por padrao o Laravel devolve as datas como um objeto Carbon, para pegar a string da data é necessário utilizar o método "toDateTimeString()"
+            
+            //$due_date = substr($due_date, 0, 10);
+            //$created_at = substr($created_at, 0, 10);
 
-            $d = DateTime::createFromFormat("Y-m-d H:i:s", $due_date);
+            //$due_date = explode('-', $due_date);
+            //$created_at = explode('-', $created_at);
+
+            //$due_date = "$due_date[2]/$due_date[1]/$due_date[0]";
+            //$created_at = "$created_at[2]/$created_at[1]/$created_at[0]";
+
+            
+
+            //dd($due_date, $created_at);
+
+
+            $d = new Carbon($due_date);
             $due_date = $d->format("d/m/Y");
 
-            //$c = DateTime::createFromFormat("Y-m-d H:i:s", $created_at);
+            //$c = new Carbon($created_at);
             //$created_at = $c->format("d/m/Y");
 
-            $task["due_date"] = $due_date;
-            //$task["created_at"] = $created_at;
+            $task->due_date = $due_date;
+            $task->created_at = $created_at;
             
             return [
                 "success" => true,

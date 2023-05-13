@@ -16,6 +16,7 @@ class Task extends Model
         "category_id",
         "title",
         "description",
+        "created_at",
         "due_date",
         "urgency",
         "is_done"
